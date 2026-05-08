@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 export const Solutions: React.FC = () => {
   return (
@@ -7,22 +10,40 @@ export const Solutions: React.FC = () => {
       className="relative py-28 border-y border-white/10 bg-gradient-to-b from-transparent to-cyan-500/5"
     >
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        <div className="relative">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative"
+        >
           <div className="absolute inset-0 bg-cyan-500/10 blur-3xl rounded-full" />
 
           <div className="relative rounded-[2rem] border border-white/10 bg-black/40 backdrop-blur-xl p-10 overflow-hidden">
             <div className="grid grid-cols-2 gap-4">
               {Array.from({ length: 6 }).map((_, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="aspect-square rounded-2xl border border-white/10 bg-white/5 animate-pulse"
+                  initial={{ opacity: 0.3 }}
+                  animate={{ opacity: [0.3, 0.6, 0.3] }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: index * 0.2,
+                  }}
+                  className="aspect-square rounded-2xl border border-white/10 bg-white/5"
                 />
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <p className="text-sm uppercase tracking-[0.3em] text-cyan-400 mb-4">
             Intelligent Platforms
           </p>
@@ -44,7 +65,7 @@ export const Solutions: React.FC = () => {
               scale, operational stress, and evolving business requirements.
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

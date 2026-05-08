@@ -1,12 +1,26 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur border-b border-white/10 bg-black/40 dark:bg-black/40">
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="sticky top-0 z-50 backdrop-blur border-b border-white/10 bg-black/40 dark:bg-black/40"
+    >
       <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
         <div className={"flex flex-row items-center justify-between"}>
-          <Image src={"/core-nova.png"} alt={"icon"} height={100} width={100} />
+          <Image
+            loading={"eager"}
+            src={"/core-nova.png"}
+            alt={"icon"}
+            height={100}
+            width={100}
+          />
           <div>
             <h1 className="text-2xl font-bold tracking-tight">
               CoreNova Technologies
@@ -32,6 +46,6 @@ export const Header: React.FC = () => {
           </a>
         </nav>
       </div>
-    </header>
+    </motion.header>
   );
 };
