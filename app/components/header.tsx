@@ -32,18 +32,38 @@ export const Header: React.FC = () => {
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#services" className="hover:text-primary transition-colors">
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="#services"
+            className="hover:text-primary transition-colors"
+          >
             Services
-          </a>
-          <a href="#solutions" className="hover:text-primary transition-colors">
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="#solutions"
+            className="hover:text-primary transition-colors"
+          >
             Solutions
-          </a>
-          <a href="#about" className="hover:text-primary transition-colors">
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="#about"
+            className="hover:text-primary transition-colors"
+          >
             About
-          </a>
-          <a href="#contact" className="hover:text-primary transition-colors">
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="#contact"
+            className="hover:text-primary transition-colors"
+          >
             Contact
-          </a>
+          </motion.a>
         </nav>
       </div>
     </motion.header>
