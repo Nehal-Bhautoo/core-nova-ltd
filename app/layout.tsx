@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CoreNova Technologies Ltd",
-  description: "CoreNova Technologies Ltd",
+  title: "CoreNova Technologies — Engineering Intelligent Systems",
+  description:
+    "Purpose-built software, AI and automation, real-time systems, and mobile experiences. CoreNova Technologies brings thoughtful engineering to your next big idea.",
 };
 
 export default function RootLayout({

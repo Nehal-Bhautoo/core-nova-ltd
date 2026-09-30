@@ -1,71 +1,93 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Arrow, Brand } from "./ui";
 
-export const Header: React.FC = () => {
+const links = [
+  { href: "#services", label: "Services" },
+  { href: "#solutions", label: "Solutions" },
+  { href: "#about", label: "About us" },
+];
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px" },
+    );
+    document
+      .querySelectorAll("main section[id]")
+      .forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        document.getElementById("menu-toggle")?.focus();
+      }
+    };
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, [open]);
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 backdrop-blur border-b border-white/10 bg-black/40 dark:bg-black/40"
-    >
-      <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
-        <div className={"flex flex-row items-center justify-between"}>
-          <Image
-            loading={"eager"}
-            src={"/core-nova.png"}
-            alt={"icon"}
-            height={100}
-            width={100}
-          />
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">
-              CoreNova Technologies
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Engineering Intelligent Systems
-            </p>
-          </div>
-        </div>
-
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="#services"
-            className="hover:text-primary transition-colors"
-          >
-            Services
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="#solutions"
-            className="hover:text-primary transition-colors"
-          >
-            Solutions
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="#about"
-            className="hover:text-primary transition-colors"
-          >
-            About
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="#contact"
-            className="hover:text-primary transition-colors"
-          >
-            Contact
-          </motion.a>
+    <header className="site-header">
+      <div className="container header-inner">
+        <a
+          href="#home"
+          aria-label="CoreNova Technologies home"
+          onClick={() => setOpen(false)}
+        >
+          <Brand />
+        </a>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={active === link.href ? "active" : ""}
+              aria-current={active === link.href ? "location" : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
+        <a href="#contact" className="button button-small header-cta">
+          Let’s talk <Arrow diagonal />
+        </a>
+        <button
+          id="menu-toggle"
+          className="menu-toggle"
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          onClick={() => setOpen(!open)}
+        >
+          <span className={open ? "menu-lines is-open" : "menu-lines"}>
+            <span />
+            <span />
+          </span>
+        </button>
       </div>
-    </motion.header>
+      <nav
+        id="mobile-navigation"
+        className="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden={!open}
+      >
+        {[...links, { href: "#contact", label: "Let’s talk ↗" }].map((link) => (
+          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </header>
   );
-};
+}

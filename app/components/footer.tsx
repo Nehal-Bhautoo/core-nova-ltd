@@ -1,30 +1,30 @@
-"use client";
+import { Arrow, Brand } from "./ui";
 
-import React from "react";
-import { motion } from "framer-motion";
-
-export const Footer: React.FC = () => {
+export function Footer() {
   return (
-    <footer id="contact" className="border-t border-white/10 py-10">
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-        className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6"
-      >
+    <footer className="site-footer container">
+      <div className="footer-main">
         <div>
-          <h4 className="font-bold text-xl">CoreNova Technologies</h4>
-          <p className="text-sm text-muted-foreground mt-2">
-            Intelligent Systems • Advanced Engineering • AI Solutions
-          </p>
+          <a href="#home" aria-label="CoreNova Technologies home">
+            <Brand />
+          </a>
+          <p>Good engineering. Greater possibilities.</p>
         </div>
-
-        <div className="text-sm text-muted-foreground text-center md:text-right">
-          <p>Email: contact@corenova.tech</p>
-          <p>© 2026 CoreNova Technologies. All rights reserved.</p>
-        </div>
-      </motion.div>
+        <nav aria-label="Footer navigation">
+          <a href="#services">Services</a>
+          <a href="#solutions">Solutions</a>
+          <a href="#about">About us</a>
+          <a href="#contact">
+            Contact <Arrow diagonal />
+          </a>
+        </nav>
+      </div>
+      <div className="footer-bottom">
+        <span>© 2026 CoreNova Technologies Ltd. All rights reserved.</span>
+        <a href="#home">
+          Back to top <span>↑</span>
+        </a>
+      </div>
     </footer>
   );
-};
+}

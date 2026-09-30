@@ -1,52 +1,57 @@
-"use client";
+import { Arrow, Eyebrow } from "./ui";
 
-import React from "react";
-import { motion } from "framer-motion";
-
-export const About: React.FC = () => {
+export function About() {
   return (
-    <section id="about" className="max-w-7xl mx-auto px-6 py-28">
-      <div className="grid lg:grid-cols-2 gap-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-sm uppercase tracking-[0.3em] text-cyan-400 mb-4">
-            About CoreNova
-          </p>
-
-          <h3 className="text-4xl md:text-5xl font-black tracking-tight">
-            A Technology Company Built Around Engineering Excellence
-          </h3>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-6 text-lg text-muted-foreground leading-relaxed"
-        >
+    <section id="about" className="section container about-section">
+      <div className="about-intro">
+        <div>
+          <Eyebrow number="03">THE CORENOVA APPROACH</Eyebrow>
+          <h2>
+            Thoughtful by design.
+            <br />
+            <span className="hero-serif">Exceptional by nature.</span>
+          </h2>
+        </div>
+        <div className="about-copy">
           <p>
-            CoreNova Technologies delivers modern software systems with an
-            emphasis on reliability, scalability, and intelligent automation.
+            We’re engineers, problem solvers, and people who care about getting
+            the details right. We bring deep technical thinking and a practical
+            understanding of your business to every project.
           </p>
-
           <p>
-            Our mission is to bridge advanced engineering with practical
-            business outcomes through high-performance software architecture and
-            next-generation digital platforms.
+            Our philosophy is simple: build with purpose, design for the long
+            term, and make the complex feel effortless.
           </p>
-
-          <p>
-            We operate with a systems-first philosophy — every component,
-            integration, and workflow is designed for long-term sustainability
-            and strategic adaptability.
-          </p>
-        </motion.div>
+          <a href="#contact" className="text-link">
+            Meet your next technology partner <Arrow diagonal />
+          </a>
+        </div>
+      </div>
+      <div className="process-grid">
+        {[
+          {
+            title: "Understand deeply",
+            desc: "Your vision is our starting point. We ask the right questions and get to the heart of the challenge.",
+          },
+          {
+            title: "Engineer thoughtfully",
+            desc: "Clear architecture, deliberate decisions, and the right technology for the problem at hand.",
+          },
+          {
+            title: "Build for tomorrow",
+            desc: "Reliable today. Adaptable tomorrow. Systems designed to keep moving your business forward.",
+          },
+        ].map((step, index) => (
+          <div className="process-step" key={step.title}>
+            <span className="process-number">
+              0{index + 1}
+              <span> /</span>
+            </span>
+            <h3>{step.title}</h3>
+            <p>{step.desc}</p>
+          </div>
+        ))}
       </div>
     </section>
   );
-};
+}

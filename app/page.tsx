@@ -1,23 +1,26 @@
-import {
-  About,
-  Cta,
-  Footer,
-  Header,
-  HeroSection,
-  Services,
-  Solutions,
-} from "@/app/components";
+import { About } from "./components/about";
+import { Cta } from "./components/cta";
+import { Footer } from "./components/footer";
+import { Header } from "./components/header";
+import { HeroSection } from "./components/hero";
+import { Services } from "./components/services";
+import { Solutions } from "./components/solution";
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+    <>
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <Header />
-      <HeroSection />
-      <Services />
-      <Solutions />
-      <About />
-      <Cta />
+      <main id="main-content">
+        <HeroSection />
+        <Services />
+        <Solutions />
+        <About />
+        <Cta />
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }
