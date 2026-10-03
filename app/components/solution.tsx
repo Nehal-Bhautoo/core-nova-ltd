@@ -1,77 +1,163 @@
 "use client";
 
-import { useState, type KeyboardEvent } from "react";
+import { useSyncExternalStore, type KeyboardEvent } from "react";
 import { Arrow, Eyebrow, Icon } from "./ui";
 
 const solutions = [
   {
-    id: "intelligence",
-    label: "Intelligent platforms",
-    title: "Connect the dots. See the bigger picture.",
+    id: "enterprise",
+    label: "Enterprise software",
+    title: "Bring your business systems together.",
     description:
-      "Bring your data, workflows, and decisions together in one connected ecosystem. We build platforms that turn complexity into a clear operational advantage.",
-    features: [
-      "AI-assisted insights and decision making",
-      "Seamless integration with your existing systems",
-      "Architecture that grows with your ambitions",
+      "When your tools don’t share data, your team fills the gaps. A connected platform can bring records, workflows, and integrations into one place.",
+    example: "A connected operations platform",
+    steps: [
+      {
+        label: "Connect",
+        title: "Existing tools & APIs",
+        detail: "Bring data from the systems your team already uses.",
+      },
+      {
+        label: "Coordinate",
+        title: "A shared platform",
+        detail: "Connect business rules, records, and workflows.",
+      },
+      {
+        label: "Use",
+        title: "One operational view",
+        detail: "Give your team a place to track and manage its work.",
+      },
     ],
-    metric: "Data processed",
-    value: "128.4",
-    unit: "k events",
-    chart: "Event throughput",
-    modules: ["Data ingestion", "Intelligence layer", "Business insights"],
-    bars: [
-      28, 40, 34, 55, 48, 43, 68, 58, 76, 63, 86, 72, 79, 67, 92, 83, 74, 89,
-      82, 96,
+    features: [
+      "Custom platforms and API integrations",
+      "Cloud infrastructure designed for your workload",
+      "Monitoring to understand system health",
+    ],
+  },
+  {
+    id: "intelligence",
+    label: "AI & automation",
+    title: "Make routine work easier to manage.",
+    description:
+      "Manual tasks can grow faster than your team. AI and automation can help organize incoming information and move work forward, with people reviewing the decisions that matter.",
+    example: "An assisted information workflow",
+    steps: [
+      {
+        label: "Receive",
+        title: "Documents & business data",
+        detail: "Collect the information a workflow needs.",
+      },
+      {
+        label: "Process",
+        title: "AI-assisted analysis",
+        detail: "Extract useful details and suggest the next action.",
+      },
+      {
+        label: "Review",
+        title: "A decision for your team",
+        detail: "Keep human review in the workflow before acting.",
+      },
+    ],
+    features: [
+      "AI-assisted insights and decision support",
+      "Automation connected to your existing systems",
+      "Workflows designed around your team’s needs",
     ],
   },
   {
     id: "telemetry",
-    label: "Real-time systems",
-    title: "Every signal. A clearer understanding.",
+    label: "Telemetry & simulation",
+    title: "Understand your systems as they run.",
     description:
-      "Understand what’s happening as it happens. Our telemetry and simulation systems bring live data into focus, helping your teams explore, monitor, and respond with confidence.",
+      "Live signals are useful when your team can interpret them. Telemetry and simulation bring system behavior into view, helping you monitor activity and explore what could happen next.",
+    example: "A live monitoring and simulation workflow",
+    steps: [
+      {
+        label: "Collect",
+        title: "Live signal streams",
+        detail: "Receive events from connected systems or sensors.",
+      },
+      {
+        label: "Interpret",
+        title: "Processing & simulation",
+        detail: "Analyze signals and explore system behavior.",
+      },
+      {
+        label: "Observe",
+        title: "A real-time view",
+        detail: "Visualize activity so your team can investigate changes.",
+      },
+    ],
     features: [
       "Live telemetry and interactive visualizations",
-      "High-performance simulation environments",
-      "Actionable monitoring across connected systems",
-    ],
-    metric: "Signals received",
-    value: "64.8",
-    unit: "k signals",
-    chart: "Signal activity",
-    modules: ["Sensor streams", "Signal processing", "Live visualization"],
-    bars: [
-      62, 32, 80, 42, 74, 56, 94, 64, 52, 87, 45, 76, 98, 67, 83, 42, 73, 92,
-      60, 81,
+      "Simulation environments for exploring scenarios",
+      "Monitoring across connected systems",
     ],
   },
   {
-    id: "infrastructure",
-    label: "Resilient infrastructure",
-    title: "A strong foundation. Room to grow.",
+    id: "mobile",
+    label: "Mobile engineering",
+    title: "Put your services in people’s hands.",
     description:
-      "Keep your business moving with thoughtfully designed infrastructure. We engineer dependable cloud systems that adapt to demand and make your next stage of growth possible.",
-    features: [
-      "Scalable cloud-native architecture",
-      "Observability built into every layer",
-      "Reliable integrations and deployment workflows",
+      "A mobile app should connect to the work behind it. We build iOS and Android experiences that bring your business services to the people who need them.",
+    example: "A mobile app connected to your platform",
+    steps: [
+      {
+        label: "Connect",
+        title: "Your business services",
+        detail:
+          "Make existing platform data and functions available through APIs.",
+      },
+      {
+        label: "Build",
+        title: "An iOS or Android app",
+        detail: "Shape the interface around what people need to do on a phone.",
+      },
+      {
+        label: "Use",
+        title: "Services on the move",
+        detail:
+          "Let people access and interact with your platform from their device.",
+      },
     ],
-    metric: "Requests handled",
-    value: "256.2",
-    unit: "k requests",
-    chart: "Request volume",
-    modules: ["API gateway", "Distributed services", "Observability"],
-    bars: [
-      22, 30, 28, 35, 38, 42, 46, 51, 48, 57, 63, 60, 69, 73, 70, 79, 83, 87,
-      91, 97,
+    features: [
+      "iOS, Android, and cross-platform development",
+      "Integration with your APIs and business systems",
+      "Mobile interfaces designed around user tasks",
     ],
   },
 ];
 
+function subscribeToHash(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  return () => window.removeEventListener("hashchange", onChange);
+}
+
+function getHash() {
+  return window.location.hash;
+}
+
+function getServerHash() {
+  return "";
+}
+
 export function Solutions() {
-  const [selected, setSelected] = useState(0);
+  const hash = useSyncExternalStore(subscribeToHash, getHash, getServerHash);
+  const selected = Math.max(
+    0,
+    solutions.findIndex((item) => hash === `#solution-${item.id}`),
+  );
   const solution = solutions[selected];
+
+  function selectSolution(index: number) {
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `#solution-${solutions[index].id}`,
+    );
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+  }
+
   function handleKeyDown(
     event: KeyboardEvent<HTMLButtonElement>,
     index: number,
@@ -88,48 +174,46 @@ export function Solutions() {
               : null;
     if (next !== null) {
       event.preventDefault();
-      setSelected(next);
-      document.getElementById(`tab-${solutions[next].id}`)?.focus();
+      selectSolution(next);
+      document.getElementById(`solution-${solutions[next].id}`)?.focus();
     }
   }
+
   return (
     <section id="solutions" className="solutions-section section">
       <div className="container">
         <div className="section-heading">
           <div>
-            <Eyebrow number="02">BUILT FOR POSSIBILITY</Eyebrow>
+            <Eyebrow number="02">EXAMPLE SOLUTIONS</Eyebrow>
             <h2>
-              Powerful on their own.
+              From a business problem
               <br />
-              Exceptional together<span className="accent">.</span>
+              to a connected system<span className="accent">.</span>
             </h2>
           </div>
           <p>
-            Connected technology, built around your world.
-            <br />
-            Explore what we can make possible.
+            Explore illustrative workflows for each service, and see how the
+            pieces could fit your business.
           </p>
         </div>
         <div
           className="solution-tabs"
           role="tablist"
-          aria-label="Our solutions"
+          aria-label="Example solutions by service"
         >
           {solutions.map((item, index) => (
             <button
               key={item.id}
-              id={`tab-${item.id}`}
+              id={`solution-${item.id}`}
               type="button"
               role="tab"
               aria-selected={selected === index}
               aria-controls="solution-panel"
               tabIndex={selected === index ? 0 : -1}
-              onClick={() => setSelected(index)}
+              onClick={() => selectSolution(index)}
               onKeyDown={(event) => handleKeyDown(event, index)}
             >
-              <span>0{index + 1}</span>
               {item.label}
-              <Arrow diagonal />
             </button>
           ))}
         </div>
@@ -137,80 +221,33 @@ export function Solutions() {
           className="solution-panel"
           role="tabpanel"
           id="solution-panel"
-          aria-labelledby={`tab-${solution.id}`}
+          aria-labelledby={`solution-${solution.id}`}
           tabIndex={0}
         >
-          <div
-            className="platform-demo"
-            aria-label={`Illustrative ${solution.label.toLowerCase()} dashboard`}
-          >
-            <div className="demo-top">
-              <span>
-                <span className="mini-brand">✳</span> CoreNova / System overview
-              </span>
-              <span className="demo-label">ILLUSTRATIVE DEMO</span>
-            </div>
-            <div className="demo-body">
-              <div className="demo-heading">
-                <span>Platform overview</span>
-                <span className="demo-status">
-                  <span className="status-dot" /> System healthy
-                </span>
+          <figure className="workflow-example">
+            <div className="platform-demo">
+              <div className="demo-top">
+                <Icon name="layers" />
+                <span>{solution.example}</span>
               </div>
-              <div className="demo-metrics">
-                <div>
-                  <span>{solution.metric}</span>
-                  <strong>
-                    {solution.value}
-                    <small>{solution.unit}</small>
-                  </strong>
-                </div>
-                <div>
-                  <span>Architecture</span>
-                  <strong className="metric-text">
-                    Connected<small>by design</small>
-                  </strong>
-                </div>
-              </div>
-              <div className="chart-top">
-                <span>{solution.chart}</span>
-                <span>Sample data · 24 hours</span>
-              </div>
-              <div className="demo-chart" aria-hidden="true">
-                <div className="chart-grid" />
-                {solution.bars.map((height, index) => (
-                  <div
-                    className="chart-bar"
-                    key={index}
-                    style={{ height: `${height}%` }}
-                  />
+              <ol className="workflow-steps">
+                {solution.steps.map((step) => (
+                  <li key={step.title}>
+                    <span className="workflow-label">{step.label}</span>
+                    <div>
+                      <h4>{step.title}</h4>
+                      <p>{step.detail}</p>
+                    </div>
+                  </li>
                 ))}
-              </div>
-              <div className="chart-axis">
-                <span>00:00</span>
-                <span>06:00</span>
-                <span>12:00</span>
-                <span>18:00</span>
-                <span>24:00</span>
-              </div>
-              <div className="demo-modules">
-                {solution.modules.map((module) => (
-                  <span key={module}>
-                    <Icon name="layers" />
-                    {module}
-                    <span className="status-dot" />
-                  </span>
-                ))}
-              </div>
+              </ol>
             </div>
-            <div className="demo-bottom">
-              <span className="status-dot" /> Three layers. One connected
-              system.
-              <Icon name="signal" />
-            </div>
-          </div>
+            <figcaption>
+              Illustrative workflow. The architecture and scope depend on your
+              project.
+            </figcaption>
+          </figure>
           <div className="solution-copy">
-            <span className="solution-kicker">DESIGNED TO WORK AS ONE</span>
             <h3>{solution.title}</h3>
             <p>{solution.description}</p>
             <ul>
@@ -222,7 +259,8 @@ export function Solutions() {
               ))}
             </ul>
             <a href="#contact" className="text-link">
-              Let’s explore your possibilities <Arrow diagonal />
+              Discuss your {solution.label.toLowerCase()} project{" "}
+              <Arrow diagonal />
             </a>
           </div>
         </div>

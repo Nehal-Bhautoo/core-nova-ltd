@@ -3,27 +3,31 @@ import { Arrow, Eyebrow, Icon } from "./ui";
 const services = [
   {
     icon: "code",
+    solution: "enterprise",
     title: "Enterprise software",
-    desc: "Robust platforms, connected APIs, and scalable architectures that power your business.",
-    tags: "PLATFORMS / APIs / CLOUD",
+    desc: "Connect business tools and data through custom platforms, APIs, and cloud infrastructure.",
+    action: "Explore enterprise systems",
   },
   {
     icon: "spark",
+    solution: "intelligence",
     title: "AI & automation",
-    desc: "Make your data work harder with intelligent workflows and AI built around your needs.",
-    tags: "AI / MACHINE LEARNING / AUTOMATION",
+    desc: "Put AI to work in your existing processes, from organizing information to automating repetitive tasks.",
+    action: "Explore AI workflows",
   },
   {
     icon: "signal",
+    solution: "telemetry",
     title: "Telemetry & simulation",
-    desc: "Turn real-time data into clarity with precision analytics and high-performance simulations.",
-    tags: "REAL-TIME / ANALYTICS / SIMULATION",
+    desc: "Monitor live signals, visualize system behavior, and explore scenarios through simulation.",
+    action: "Explore real-time systems",
   },
   {
     icon: "mobile",
+    solution: "mobile",
     title: "Mobile engineering",
-    desc: "Thoughtful mobile experiences with the reliability and performance your users expect.",
-    tags: "iOS / ANDROID / CROSS-PLATFORM",
+    desc: "Bring your services to iOS and Android with mobile apps connected to your business systems.",
+    action: "Explore mobile experiences",
   },
 ] as const;
 
@@ -34,20 +38,20 @@ export function Services() {
         <div>
           <Eyebrow number="01">OUR CAPABILITIES</Eyebrow>
           <h2>
-            Great ideas deserve
+            The systems your
             <br />
-            exceptional engineering<span className="accent">.</span>
+            business depends on<span className="accent">.</span>
           </h2>
         </div>
         <p>
-          From the systems behind the scenes to the experiences in your hands,
-          we build every layer with purpose.
+          Choose the challenge you’re working on. Each service leads to an
+          example of how the pieces can work together.
         </p>
       </div>
       <div className="service-grid">
         {services.map((item, index) => (
           <a
-            href={`#${index === 3 ? "contact" : "solutions"}`}
+            href={`#solution-${item.solution}`}
             className="service-card"
             key={item.title}
           >
@@ -60,7 +64,7 @@ export function Services() {
             <h3>{item.title}</h3>
             <p>{item.desc}</p>
             <div className="service-card-bottom">
-              <span>{item.tags}</span>
+              <span>{item.action}</span>
               <Arrow diagonal />
             </div>
           </a>

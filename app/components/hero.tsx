@@ -118,31 +118,31 @@ export function HeroSection() {
       <section id="home" className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <Eyebrow>ENGINEERING WHAT’S NEXT</Eyebrow>
+            <Eyebrow>SOFTWARE, AI & REAL-TIME SYSTEMS</Eyebrow>
             <h1>
               Complex challenges.
               <br />
               <span className="hero-serif">Intelligent systems.</span>
             </h1>
             <p className="hero-description">
-              We turn ambitious ideas into exceptional software. Purpose-built
-              platforms, intelligent automation, and the engineering to bring it
-              all together.
+              Connect your business systems, automate manual workflows, and turn
+              live data into decisions. We build the software, integrations, and
+              mobile experiences to bring it together.
             </p>
             <div className="hero-actions">
               <a href="#solutions" className="button">
-                Explore our solutions <Arrow />
+                See example solutions <Arrow />
               </a>
               <a href="#contact" className="text-link">
-                Build with us <Arrow diagonal />
+                Discuss your project <Arrow diagonal />
               </a>
             </div>
             <div className="hero-note">
               <span className="tiny-cross">+</span>
               <p>
-                Built for your business.
+                Enterprise software. AI & automation.
                 <br />
-                <strong>Engineered for what comes next.</strong>
+                <strong>Telemetry & simulation. Mobile engineering.</strong>
               </p>
             </div>
           </div>

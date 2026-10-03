@@ -23,7 +23,7 @@ export function About() {
             term, and make the complex feel effortless.
           </p>
           <a href="#contact" className="text-link">
-            Meet your next technology partner <Arrow diagonal />
+            Discuss your project with us <Arrow diagonal />
           </a>
         </div>
       </div>
@@ -31,15 +31,15 @@ export function About() {
         {[
           {
             title: "Understand deeply",
-            desc: "Your vision is our starting point. We ask the right questions and get to the heart of the challenge.",
+            desc: "Start with the problem, the people using the system, and the tools it needs to connect to.",
           },
           {
             title: "Engineer thoughtfully",
-            desc: "Clear architecture, deliberate decisions, and the right technology for the problem at hand.",
+            desc: "Map the data flow, define the integrations, and choose an architecture suited to the work.",
           },
           {
             title: "Build for tomorrow",
-            desc: "Reliable today. Adaptable tomorrow. Systems designed to keep moving your business forward.",
+            desc: "Consider reliability, monitoring, and future changes alongside the features you need today.",
           },
         ].map((step, index) => (
           <div className="process-step" key={step.title}>
