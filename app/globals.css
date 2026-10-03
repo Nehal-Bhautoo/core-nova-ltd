@@ -344,7 +344,7 @@ svg {
 }
 .orbit-rings {
   transform-origin: 260px 250px;
-  animation: orbit-drift 22s ease-in-out infinite alternate;
+  animation: orbit-drift 8s ease-in-out infinite alternate;
 }
 .visual-topline,
 .visual-bottomline {
