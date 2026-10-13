@@ -140,7 +140,7 @@ export function HeroSection() {
             <div className="hero-note">
               <span className="tiny-cross">+</span>
               <p>
-                Enterprise software. AI & automation.
+                Enterprise software. Cove for friends.
                 <br />
                 <strong>Telemetry & simulation. Mobile engineering.</strong>
               </p>

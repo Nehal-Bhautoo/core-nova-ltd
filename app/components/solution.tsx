@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore, type KeyboardEvent } from "react";
+import Link from "next/link";
 import { Arrow, Eyebrow, Icon } from "./ui";
 
 const solutions = [
@@ -35,33 +36,33 @@ const solutions = [
     ],
   },
   {
-    id: "intelligence",
-    label: "AI & automation",
-    title: "Make routine work easier to manage.",
+    id: "cove",
+    label: "Cove",
+    title: "A place for your people.",
     description:
-      "Manual tasks can grow faster than your team. AI and automation can help organize incoming information and move work forward, with people reviewing the decisions that matter.",
-    example: "An assisted information workflow",
+      "Cove gives a small group of friends a self-hosted place to chat, call, and share their screens. One friend hosts the group; everyone connects to that computer.",
+    example: "How a Cove group comes together",
     steps: [
       {
-        label: "Receive",
-        title: "Documents & business data",
-        detail: "Collect the information a workflow needs.",
+        label: "Host",
+        title: "One friend’s computer",
+        detail: "Run Cove and create a private group on your own host.",
       },
       {
-        label: "Process",
-        title: "AI-assisted analysis",
-        detail: "Extract useful details and suggest the next action.",
+        label: "Invite",
+        title: "Your circle of friends",
+        detail: "Share an invite and connect everyone to the same host.",
       },
       {
-        label: "Review",
-        title: "A decision for your team",
-        detail: "Keep human review in the workflow before acting.",
+        label: "Hang out",
+        title: "Chat, calls & screen sharing",
+        detail: "Catch up in text channels or join a voice room together.",
       },
     ],
     features: [
-      "AI-assisted insights and decision support",
-      "Automation connected to your existing systems",
-      "Workflows designed around your team’s needs",
+      "Private groups and one-to-one messages",
+      "Voice rooms, camera video, and screen sharing",
+      "Self-hosted, with no required subscription",
     ],
   },
   {
@@ -243,8 +244,9 @@ export function Solutions() {
               </ol>
             </div>
             <figcaption>
-              Illustrative workflow. The architecture and scope depend on your
-              project.
+              {solution.id === "cove"
+                ? "Cove’s hosting model. Remote connections need a reachable host and may need a call relay."
+                : "Illustrative workflow. The architecture and scope depend on your project."}
             </figcaption>
           </figure>
           <div className="solution-copy">
@@ -258,10 +260,16 @@ export function Solutions() {
                 </li>
               ))}
             </ul>
-            <a href="#contact" className="text-link">
-              Discuss your {solution.label.toLowerCase()} project{" "}
-              <Arrow diagonal />
-            </a>
+            {solution.id === "cove" ? (
+              <Link href="/cove" className="text-link">
+                Explore Cove in detail <Arrow diagonal />
+              </Link>
+            ) : (
+              <a href="#contact" className="text-link">
+                Discuss your {solution.label.toLowerCase()} project{" "}
+                <Arrow diagonal />
+              </a>
+            )}
           </div>
         </div>
       </div>

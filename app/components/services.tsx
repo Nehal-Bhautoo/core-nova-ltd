@@ -1,30 +1,31 @@
+import Link from "next/link";
 import { Arrow, Eyebrow, Icon } from "./ui";
 
 const services = [
   {
     icon: "code",
-    solution: "enterprise",
+    href: "#solution-enterprise",
     title: "Enterprise software",
     desc: "Connect business tools and data through custom platforms, APIs, and cloud infrastructure.",
     action: "Explore enterprise systems",
   },
   {
     icon: "spark",
-    solution: "intelligence",
-    title: "AI & automation",
-    desc: "Put AI to work in your existing processes, from organizing information to automating repetitive tasks.",
-    action: "Explore AI workflows",
+    href: "/cove",
+    title: "Cove",
+    desc: "A self-hosted desktop home for friends. Catch up in private chats, join a call, and share your screen.",
+    action: "Discover the Cove project",
   },
   {
     icon: "signal",
-    solution: "telemetry",
+    href: "#solution-telemetry",
     title: "Telemetry & simulation",
     desc: "Monitor live signals, visualize system behavior, and explore scenarios through simulation.",
     action: "Explore real-time systems",
   },
   {
     icon: "mobile",
-    solution: "mobile",
+    href: "#solution-mobile",
     title: "Mobile engineering",
     desc: "Bring your services to iOS and Android with mobile apps connected to your business systems.",
     action: "Explore mobile experiences",
@@ -45,16 +46,13 @@ export function Services() {
         </div>
         <p>
           Choose the challenge you’re working on. Each service leads to an
-          example of how the pieces can work together.
+          example of how the pieces can work together, or explore Cove, our
+          desktop project for friends.
         </p>
       </div>
       <div className="service-grid">
         {services.map((item, index) => (
-          <a
-            href={`#solution-${item.solution}`}
-            className="service-card"
-            key={item.title}
-          >
+          <Link href={item.href} className="service-card" key={item.title}>
             <div className="service-card-top">
               <span className="service-icon">
                 <Icon name={item.icon} />
@@ -67,7 +65,7 @@ export function Services() {
               <span>{item.action}</span>
               <Arrow diagonal />
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

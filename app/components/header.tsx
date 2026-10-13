@@ -1,15 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Arrow, Brand } from "./ui";
 
 const links = [
   { href: "#services", label: "Services" },
   { href: "#solutions", label: "Solutions" },
+  { href: "/cove", label: "Cove" },
   { href: "#about", label: "About us" },
 ];
 
-export function Header() {
+export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
+  const destination = (href: string) =>
+    !isHomePage && href.startsWith("#") ? `/${href}` : href;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
   useEffect(() => {
@@ -40,28 +44,42 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <a
-          href="#home"
+        <Link
+          href={destination("#home")}
           aria-label="CoreNova Technologies home"
           onClick={() => setOpen(false)}
         >
           <Brand />
-        </a>
+        </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
-              className={active === link.href ? "active" : ""}
-              aria-current={active === link.href ? "location" : undefined}
+              href={destination(link.href)}
+              className={
+                (isHomePage && active === link.href) ||
+                (!isHomePage && link.href === "/cove")
+                  ? "active"
+                  : ""
+              }
+              aria-current={
+                !isHomePage && link.href === "/cove"
+                  ? "page"
+                  : isHomePage && active === link.href
+                    ? "location"
+                    : undefined
+              }
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
-        <a href="#contact" className="button button-small header-cta">
+        <Link
+          href={destination("#contact")}
+          className="button button-small header-cta"
+        >
           Let’s talk <Arrow diagonal />
-        </a>
+        </Link>
         <button
           id="menu-toggle"
           className="menu-toggle"
@@ -83,9 +101,13 @@ export function Header() {
         hidden={!open}
       >
         {[...links, { href: "#contact", label: "Let’s talk ↗" }].map((link) => (
-          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+          <Link
+            key={link.href}
+            href={destination(link.href)}
+            onClick={() => setOpen(false)}
+          >
             {link.label}
-          </a>
+          </Link>
         ))}
       </nav>
     </header>
