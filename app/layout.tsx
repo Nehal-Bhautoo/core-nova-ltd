@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
@@ -17,6 +17,14 @@ export const metadata: Metadata = {
   title: "CoreNova Technologies — Engineering Intelligent Systems",
   description:
     "Purpose-built software, AI and automation, real-time systems, and mobile experiences. CoreNova Technologies brings thoughtful engineering to your next big idea.",
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f8f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#101411" },
+  ],
 };
 
 export default function RootLayout({

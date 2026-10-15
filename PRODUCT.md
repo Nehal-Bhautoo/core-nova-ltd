@@ -35,6 +35,19 @@ ask about builds and source access through the company email.
 
 ## Presentation constraints
 
+The website follows the browser/system light or dark preference automatically
+through `prefers-color-scheme`, including changes while a page is open. Shared
+semantic color tokens in `app/globals.css` cover the homepage, navigation, Cove
+page, and orbital artwork. Browser controls and supported browser chrome use
+matching color-scheme and theme-color metadata. Keep the actual Cove app
+screenshot and the deliberately mint contact panel in their original colors;
+do not invert images or apply a page-wide color filter.
+
+The header groups project pages under a Projects dropdown on desktop and mobile.
+Both menus use `app/data/projects.ts`; add future project names, local URLs, and
+short descriptions there. Cove links to `/cove`. Keep keyboard access,
+Escape-to-close behavior, outside-click dismissal, and current-page indication.
+
 Extend the established CoreNova interface without replacing its identity or
 unrelated content. Keep desktop and mobile navigation, keyboard access, and
 reduced-motion support. The Cove screenshot shows the actual app with fictional

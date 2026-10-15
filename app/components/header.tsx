@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Arrow, Brand } from "./ui";
+import { ProjectDropdown } from "./project-dropdown";
 
 const links = [
   { href: "#services", label: "Services" },
   { href: "#solutions", label: "Solutions" },
-  { href: "/cove", label: "Cove" },
   { href: "#about", label: "About us" },
 ];
 
@@ -34,6 +34,13 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
     if (!open) return;
     const close = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        if (
+          event.defaultPrevented ||
+          (event.target instanceof Element &&
+            event.target.closest("details[open]"))
+        ) {
+          return;
+        }
         setOpen(false);
         document.getElementById("menu-toggle")?.focus();
       }
@@ -56,23 +63,15 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
             <Link
               key={link.href}
               href={destination(link.href)}
-              className={
-                (isHomePage && active === link.href) ||
-                (!isHomePage && link.href === "/cove")
-                  ? "active"
-                  : ""
-              }
+              className={isHomePage && active === link.href ? "active" : ""}
               aria-current={
-                !isHomePage && link.href === "/cove"
-                  ? "page"
-                  : isHomePage && active === link.href
-                    ? "location"
-                    : undefined
+                isHomePage && active === link.href ? "location" : undefined
               }
             >
               {link.label}
             </Link>
           ))}
+          <ProjectDropdown />
         </nav>
         <Link
           href={destination("#contact")}
@@ -100,7 +99,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
         aria-label="Mobile navigation"
         hidden={!open}
       >
-        {[...links, { href: "#contact", label: "Let’s talk ↗" }].map((link) => (
+        {links.map((link) => (
           <Link
             key={link.href}
             href={destination(link.href)}
@@ -109,6 +108,14 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
             {link.label}
           </Link>
         ))}
+        <ProjectDropdown mobile onNavigate={() => setOpen(false)} />
+        <Link
+          href={destination("#contact")}
+          className="flex items-center justify-between gap-3"
+          onClick={() => setOpen(false)}
+        >
+          Let’s talk <Arrow diagonal />
+        </Link>
       </nav>
     </header>
   );

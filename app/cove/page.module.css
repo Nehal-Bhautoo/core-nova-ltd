@@ -1,6 +1,7 @@
 .page {
-  --cove-accent: #8be1c4;
+  color: var(--foreground);
 }
+
 .hero {
   padding-top: 35px;
 }
@@ -125,7 +126,7 @@
   width: 100%;
   height: auto;
   display: block;
-  border: 1px solid #8be1c438;
+  border: 1px solid var(--cove-line);
   border-radius: 12px;
 }
 .preview figcaption {
@@ -191,7 +192,7 @@
   margin-top: 13px;
 }
 .setup {
-  background: #151d18;
+  background: var(--surface-subtle);
   border-block: 1px solid var(--line);
 }
 .steps {
@@ -205,7 +206,7 @@
 }
 .steps li {
   counter-increment: step;
-  border-top: 1px solid #8be1c440;
+  border-top: 1px solid var(--cove-line);
   padding-top: 20px;
 }
 .steps li::before {
@@ -215,7 +216,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid #8be1c45c;
+  border: 1px solid var(--cove-line-strong);
   color: var(--cove-accent);
   font-size: 14px;
   margin-bottom: 24px;
@@ -246,9 +247,9 @@
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.85em;
   padding: 2px 5px;
-  background: #ffffff08;
+  background: var(--code-background);
   border-radius: 3px;
-  color: #d7e5db;
+  color: var(--code-text);
 }
 .setupNote a {
   color: var(--cove-accent);
@@ -329,7 +330,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 35px;
-  border-block: 1px solid #8be1c438;
+  border-block: 1px solid var(--cove-line);
   padding-block: 42px;
   margin-bottom: 70px;
 }

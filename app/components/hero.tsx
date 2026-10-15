@@ -14,7 +14,7 @@ function CoreVisual() {
           cx={260 + x * 147}
           cy={250 + y * 147 + x * 27}
           r={z > 0 ? 1.4 : 0.8}
-          fill={z > 0 ? "#a5ebca" : "#376c58"}
+          fill={z > 0 ? "var(--orbital-front)" : "var(--orbital-back)"}
           opacity={z > 0 ? 0.8 : 0.4}
         />
       );
@@ -41,8 +41,8 @@ function CoreVisual() {
       >
         <defs>
           <radialGradient id="core-glow">
-            <stop stopColor="#6fddb0" stopOpacity=".16" />
-            <stop offset="1" stopColor="#6fddb0" stopOpacity="0" />
+            <stop stopColor="var(--orbital-glow)" stopOpacity=".16" />
+            <stop offset="1" stopColor="var(--orbital-glow)" stopOpacity="0" />
           </radialGradient>
           <linearGradient
             id="orbit-stroke"
@@ -52,9 +52,17 @@ function CoreVisual() {
             y2="380"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#b9f8d6" stopOpacity=".85" />
-            <stop offset=".5" stopColor="#69bd99" stopOpacity=".12" />
-            <stop offset="1" stopColor="#b9f8d6" stopOpacity=".65" />
+            <stop stopColor="var(--orbital-stroke)" stopOpacity=".85" />
+            <stop
+              offset=".5"
+              stopColor="var(--orbital-stroke-muted)"
+              stopOpacity=".12"
+            />
+            <stop
+              offset="1"
+              stopColor="var(--orbital-stroke)"
+              stopOpacity=".65"
+            />
           </linearGradient>
         </defs>
         <circle cx="260" cy="250" r="238" fill="url(#core-glow)" />
@@ -85,15 +93,25 @@ function CoreVisual() {
             strokeDasharray="3 6"
           />
         </g>
-        <circle cx="260" cy="250" r="149" stroke="#8fdbb3" strokeOpacity=".2" />
+        <circle
+          cx="260"
+          cy="250"
+          r="149"
+          stroke="var(--orbital-boundary)"
+          strokeOpacity=".2"
+        />
         {dots}
-        <path d="M247 237h26m-13-13v26" stroke="#d2ffe4" strokeWidth="1.5" />
-        <g fill="#bbfbd7">
+        <path
+          d="M247 237h26m-13-13v26"
+          stroke="var(--orbital-core)"
+          strokeWidth="1.5"
+        />
+        <g fill="var(--orbital-node)">
           <circle cx="71" cy="359" r="4" />
           <circle cx="436" cy="355" r="4" />
           <circle cx="299" cy="63" r="3" />
         </g>
-        <g stroke="#8bbba0" strokeOpacity=".4">
+        <g stroke="var(--orbital-wire)" strokeOpacity=".4">
           <path d="M71 359v31h50M436 355v-32h30M299 63V43h-45" />
           <path d="M46 185v-12h12m404 252h12v-12" />
         </g>

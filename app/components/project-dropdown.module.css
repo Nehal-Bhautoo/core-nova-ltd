@@ -1,0 +1,121 @@
+.dropdown {
+  position: relative;
+}
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 56px;
+  padding-block: 18px;
+  list-style: none;
+  cursor: pointer;
+  color: inherit;
+  transition: color 0.2s;
+}
+.trigger::-webkit-details-marker {
+  display: none;
+}
+.trigger:hover,
+.dropdown[open] .trigger,
+.dropdown[data-current="true"] .trigger {
+  color: var(--accent);
+}
+.trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+.chevron {
+  transition: transform 0.2s;
+}
+.dropdown[open] .chevron {
+  transform: rotate(180deg);
+}
+.panel {
+  position: absolute;
+  inset-block-start: calc(100% + 2px);
+  inset-inline-start: -18px;
+  z-index: 2;
+  width: 300px;
+  max-width: calc(100vw - 40px);
+  max-height: min(420px, 65vh);
+  overflow-y: auto;
+  margin: 0;
+  padding: 7px;
+  list-style: none;
+  border: 1px solid var(--accent-line);
+  border-radius: 8px;
+  background: var(--surface-raised);
+}
+.dropdown .projectLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 70px;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: 4px;
+  color: var(--foreground);
+  transition: background 0.2s;
+}
+.dropdown .projectLink:hover,
+.dropdown .projectLink:focus-visible {
+  background: var(--accent-soft);
+  color: var(--foreground);
+}
+.dropdown .projectLink[aria-current="page"] {
+  background: var(--accent-soft);
+}
+.projectLink > span {
+  min-width: 0;
+}
+.projectName {
+  display: block;
+  font-size: var(--type-label);
+  font-weight: 550;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.projectLink[aria-current="page"] .projectName {
+  color: var(--accent);
+}
+.description {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: var(--type-meta);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.projectLink > svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+.mobile .trigger {
+  min-height: 57px;
+  padding: 16px 4px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--secondary-text);
+}
+.mobile[open] .trigger,
+.mobile[data-current="true"] .trigger {
+  color: var(--accent);
+}
+.mobile .panel {
+  position: static;
+  width: 100%;
+  max-width: none;
+  margin-block: 10px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .chevron,
+  .dropdown .projectLink {
+    transition: none;
+  }
+}
